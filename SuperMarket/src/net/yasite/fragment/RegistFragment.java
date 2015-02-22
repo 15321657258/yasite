@@ -6,6 +6,7 @@ import net.yasite.model.GoodsListModel;
 import net.yasite.net.HandlerHelp;
 import net.yasite.sharepre.UserInfoShare;
 import net.yasite.test.DetailActivity;
+import net.yasite.test.HomeActivity;
 import net.yasite.test.R;
 import android.app.Fragment;
 import android.content.Context;
@@ -86,16 +87,24 @@ public class RegistFragment extends Fragment {
 		@Override
 		public void updateUI() {
 			// TODO Auto-generated method stub
+			String va = infoShare.getCheck();
 			entity = data.getData();
 			if (entity != null) {
 				int id = infoShare.getGoodsId("goods", context.MODE_PRIVATE);
 				infoShare.insertUserInfo("userinfo", context.MODE_PRIVATE,
 						entity.getUser_name(), entity.getPassword(),
 						entity.getUser_id(), entity.getToken());
-				Intent intent = new Intent(getActivity(), DetailActivity.class);
-				intent.putExtra("id", Integer.toString(id));
-				startActivity(intent);
-			} else {
+				
+				if(id!=-1){
+					Intent intent = new Intent(getActivity(), DetailActivity.class);
+					intent.putExtra("id", Integer.toString(id));
+					startActivity(intent);
+				} else{
+					Intent intent = new Intent(getActivity(), HomeActivity.class);
+//					intent.putExtra("regist", va);
+					startActivity(intent);
+				}
+			}else {
 				Toast.makeText(context, "注册失败，请稍后重试", 1).show();
 			}
 		}
@@ -109,8 +118,6 @@ public class RegistFragment extends Fragment {
 		@Override
 		public void doTaskAsNoNetWork(Message msg) throws Exception {
 			// TODO Auto-generated method stub
-
 		}
-
 	}
 }

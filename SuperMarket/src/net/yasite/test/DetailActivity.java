@@ -9,7 +9,9 @@ import net.yasite.dao.GoodsDao;
 import net.yasite.entity.GoodEntity;
 import net.yasite.entity.GoodListEntity;
 import net.yasite.entity.UserCarDataEntity;
+import net.yasite.entity.UserCarDatasEntity;
 import net.yasite.entity.UserCarEntity;
+import net.yasite.exit.Exit;
 import net.yasite.model.GoodsListModel;
 import net.yasite.net.HandlerHelp;
 import net.yasite.sharepre.UserInfoShare;
@@ -40,14 +42,15 @@ public class DetailActivity extends BaseNewActivity{
 	private GoodsListModel model;
 	private GoodListEntity entity;
 	private List<GoodEntity> list;
+	private UserCarEntity carEntity;
+	private UserCarDatasEntity carDatasEntity;
 	private int num = 1;
 	private GoodsDao dao;
 	private UserInfoShare infoShare;
 	private String user_id,token,goods_sn,goods_name;
 	private float market_price1,goods_price;
 	private int goods_number,goods_id;
-	private UserCarDataEntity carDataEntity;
-	private UserCarEntity carEntity;
+	
 	private String image,username;
 	@Override
 	public void setupView() {
@@ -68,6 +71,7 @@ public class DetailActivity extends BaseNewActivity{
 		jian_btn.setOnClickListener(lis);
 		add_car.setOnClickListener(lis);
 		buy.setOnClickListener(lis);
+		Exit.getInstance().addActivity(this);
 	}
 	OnClickListener lis = new OnClickListener() {
 		
@@ -170,10 +174,10 @@ public class DetailActivity extends BaseNewActivity{
 			if(entity==null){
 				entity = model.getGoodsDetail(Integer.parseInt(id));
 			}else{
-				carDataEntity = model.getCar(token, user_id, goods_id, goods_sn, goods_name, market_price1, goods_price, goods_number);
-				carEntity = carDataEntity.getData();
-				dao.insertToCar(carEntity.getGoods_id(), image, username, carEntity.getGoods_name(), carEntity.getGoods_price(), carEntity.getUser_id());
-				infoShare.insertUserId("userid", MODE_PRIVATE, carEntity.getUser_id());
+				carDatasEntity = model.getCar(token, user_id, goods_id, goods_sn, goods_name, market_price1, goods_price, goods_number);
+				carEntity = carDatasEntity.getData();
+				dao.insertToCar(carEntity.getGoods_id(), image, username, carEntity.getGoods_name(), carEntity.getGoods_price(),carEntity.getRec_id());
+				
 			}
 		}
 

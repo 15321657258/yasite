@@ -45,6 +45,30 @@
             android:name="net.yasite.test.LoginActivity"
             android:label="登录" >
         </activity>
+        <activity
+            android:name="net.yasite.test.OwnDetailActivity"
+            android:label="用户详情" >
+        </activity>
+        <activity
+            android:name="net.yasite.test.AddressActivity"
+            android:label="收货地址管理" >
+        </activity>
+        <activity
+            android:name="net.yasite.test.AddAddressEditActivity"
+            android:label="收货地址管理" >
+        </activity>
+        <activity
+            android:name="net.yasite.test.UserAddressInfoActivity"
+            android:label="收货地址管理" >
+        </activity>
+        <activity
+            android:name="net.yasite.test.CreateOrderActivity"
+            android:label="收货地址管理" >
+        </activity>
+        <activity
+            android:name="net.yasite.test.OrderActivity"
+            android:label="收货地址管理" >
+        </activity>
     </application>
 
 </manifest>

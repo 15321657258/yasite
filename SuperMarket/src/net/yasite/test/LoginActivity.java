@@ -2,6 +2,7 @@ package net.yasite.test;
 
 import net.yasite.entity.UserInfoData;
 import net.yasite.entity.UserInfoEntity;
+import net.yasite.exit.Exit;
 import net.yasite.model.GoodsListModel;
 import net.yasite.net.HandlerHelp;
 import net.yasite.sharepre.UserInfoShare;
@@ -27,6 +28,7 @@ public class LoginActivity extends BaseNewActivity {
 	private UserInfoShare infoShare;
 	private Intent intent;
 	private String extra;
+	
 	@Override
 	public void setupView() {
 		// TODO Auto-generated method stub
@@ -40,6 +42,7 @@ public class LoginActivity extends BaseNewActivity {
 		login_button.setOnClickListener(lis);
 		textView.setOnClickListener(lis);
 		intent = getIntent();
+		Exit.getInstance().addActivity(this);
 		if(intent!=null){
 			if(intent.getStringExtra("login")!=null)
 			extra = intent.getStringExtra("login");
@@ -55,6 +58,7 @@ public class LoginActivity extends BaseNewActivity {
 				Intent intent = new Intent(context, HomeActivity.class);
 				intent.putExtra("regist", "regist");
 				startActivity(intent);
+				finish();
 				break;
 			case R.id.login_button:
 				login();
@@ -140,6 +144,15 @@ public class LoginActivity extends BaseNewActivity {
 								entity.getUser_id(), entity.getToken());
 						Intent intent = new Intent(context, HomeActivity.class);
 						setResult(1, intent);
+						finish();
+					}else if(extra.equals("own")){
+						infoShare = new UserInfoShare(context);
+						infoShare.insertUserInfo("userinfo", context.MODE_PRIVATE,
+								entity.getUser_name(), entity.getPassword(),
+								entity.getUser_id(), entity.getToken());
+						Intent intent = new Intent(context, HomeActivity.class);
+						intent.putExtra("own", "own");
+						setResult(2, intent);
 						finish();
 					}
 				}

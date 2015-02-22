@@ -18,7 +18,7 @@ public class DbUtil extends SQLiteOpenHelper {
 		
 		// TODO Auto-generated method stub
 		db.execSQL("create table goodsname(name varchar(26),tiao integer)");
-		db.execSQL("create table car(id integer primary key autoincrement,goods_id varchar(10),image varchar(25),user varchar(20),name varchar(20),price varchar(20))");
+		db.execSQL("create table car(id integer primary key autoincrement,goods_id varchar(10),image varchar(25),user varchar(20),name varchar(20),price varchar(20),rec_id varchar(5))");
 	}
 
 	@Override

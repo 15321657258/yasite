@@ -7,6 +7,7 @@ import net.yasite.adapter.GoodsAdapter;
 import net.yasite.dao.GoodsDao;
 import net.yasite.entity.GoodEntity;
 import net.yasite.entity.GoodListEntity;
+import net.yasite.exit.Exit;
 import net.yasite.model.GoodsListModel;
 import net.yasite.net.HandlerHelp;
 import net.yasite.view.XListView;
@@ -50,6 +51,7 @@ public class ProductListActivity extends BaseNewActivity implements OnScrollList
 		context = this;
 		listView = (XListView) findViewById(R.id.list_view);
 		listView.setOnItemClickListener(listener);
+		Exit.getInstance().addActivity(this);
 	}
 	OnItemClickListener listener = new OnItemClickListener() {
 

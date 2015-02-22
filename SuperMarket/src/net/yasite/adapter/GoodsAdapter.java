@@ -65,7 +65,7 @@ public class GoodsAdapter extends YasiteAdapter{
 		goodsHolder.imageView = (ImageView) convertView.findViewById(R.id.thumb);
 		goodsHolder.text_name = (TextView) convertView.findViewById(R.id.goods_name);
 		goodsHolder.shop_price = (TextView) convertView.findViewById(R.id.market_price);
-		goodsHolder.marker_price = (TextView) convertView.findViewById(R.id.promote_price);
+		goodsHolder.marker_price = (TextView) convertView.findViewById(R.id.goods_price);
 		
 	}
 
@@ -77,13 +77,12 @@ public class GoodsAdapter extends YasiteAdapter{
 			GoodEntity entity = (GoodEntity) obj;
 			goodsHolder.text_name.setText(entity.getGoods_name());
 			goodsHolder.marker_price.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG |Paint.ANTI_ALIAS_FLAG);
-			goodsHolder.marker_price.setText(entity.getMarket_price());
-			goodsHolder.text_name.setText(entity.getShop_price());
+			goodsHolder.marker_price.setText("￥"+entity.getMarket_price());
+			goodsHolder.shop_price.setText("￥"+entity.getShop_price());
 //			mImageLoader.displayImage("http://www.yasite.net/ecshop/"+entity.getGoods_thumb(), goodsHolder.imageView);
 			ImageWorker.getImage(context, "http://www.yasite.net/ecshop/"+entity.getGoods_thumb(), goodsHolder.imageView, R.drawable.default_photo);
 			
 		}
-		
 	}
 
 	@Override
@@ -95,7 +94,7 @@ public class GoodsAdapter extends YasiteAdapter{
 	@Override
 	protected void setLayoutResource(int position) {
 		// TODO Auto-generated method stub
-		layoutId = R.layout.goods_item;
+		layoutId = R.layout.mygoods_item;
 	}
 	class GoodsHolder extends ViewHolder{
 		ImageView imageView;

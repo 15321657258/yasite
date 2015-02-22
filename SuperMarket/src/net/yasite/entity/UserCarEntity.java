@@ -10,6 +10,14 @@ public class UserCarEntity {
 	private String session_id;
 	private String goods_price;
 	private String goods_number;
+	private boolean check;
+	
+	public boolean isCheck() {
+		return check;
+	}
+	public void setCheck(boolean check) {
+		this.check = check;
+	}
 	public String getRec_id() {
 		return rec_id;
 	}

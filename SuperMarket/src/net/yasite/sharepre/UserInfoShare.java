@@ -1,11 +1,13 @@
 package net.yasite.sharepre;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.widget.EditText;
 
 @SuppressLint("CommitPrefEdits")
 public class UserInfoShare {
@@ -49,5 +51,30 @@ public class UserInfoShare {
 	public String getUserId(String name,int mode){
 		SharedPreferences preferences = context.getSharedPreferences(name, mode);
 		return preferences.getString("user_id", "");
+	}
+	
+	public void insertAddress(Map<String, String> value){
+		SharedPreferences preferences = context.getSharedPreferences("address", context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		for(Entry<String, String> map:value.entrySet()){
+			String key = map.getKey();
+			String va = map.getValue();
+			editor.putString(key, va);
+		}
+		editor.commit();
+	}
+	public String getAddress(String key){
+		SharedPreferences preferences = context.getSharedPreferences("address", context.MODE_PRIVATE);
+		return preferences.getString(key, "");
+	}
+	public void saveChecked(String value){
+		SharedPreferences preferences = context.getSharedPreferences("check", context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putString("check", value);
+		editor.commit();
+	}
+	public String getCheck(){
+		SharedPreferences preferences = context.getSharedPreferences("check", context.MODE_PRIVATE);
+		return preferences.getString("check", "");
 	}
 }

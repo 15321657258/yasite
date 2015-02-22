@@ -3,6 +3,7 @@ package net.yasite.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.yasite.adapter.ClassifyAdapter;
 import net.yasite.entity.ClassifyDataEntity;
 import net.yasite.entity.ClassifyEntity;
 import net.yasite.model.GoodsListModel;
@@ -32,8 +33,8 @@ public class ClassiFragment extends Fragment{
 	private ClassifyDataEntity dataEntity,dataEntity1;
 	private List<ClassifyEntity> entity,entity1;
 	private XListView listView,listView2;
-	private ArrayAdapter<String> adapter;
 	private int c = 0;
+	private ClassifyAdapter adapter;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class ClassiFragment extends Fragment{
 		TextView text_title = (TextView) view.findViewById(R.id.title_all);
 		text_title.setText("  分类");
 		listView.setOnItemClickListener(listener);
+		adapter = new ClassifyAdapter(context);
 		new MyHelper(context).execute();
 		return view;
 	}
@@ -55,7 +57,8 @@ public class ClassiFragment extends Fragment{
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			// TODO Auto-generated method stub
-			  
+			
+			
 			c = Integer.parseInt(entity.get(position-1).getCat_id());
 			new MyHelper1(context).execute();
 		}
@@ -78,11 +81,10 @@ public class ClassiFragment extends Fragment{
 				for(ClassifyEntity en:entity){
 					list.add(en.getCat_name());
 				}
-				adapter = new ArrayAdapter<String>(context, android.R.layout.simple_expandable_list_item_1, list);
+				adapter = new ClassifyAdapter(context);
 				listView.setAdapter(adapter);
-			
-			
-			
+				adapter.setList(list);
+				adapter.notifyDataSetChanged();
 		}
 
 		@Override
@@ -112,9 +114,10 @@ public class ClassiFragment extends Fragment{
 				for(ClassifyEntity en:entity1){
 					list.add(en.getCat_name());
 				}
-				adapter = new ArrayAdapter<String>(context, android.R.layout.simple_expandable_list_item_1, list);
-				
+				adapter = new ClassifyAdapter(context);
 				listView2.setAdapter(adapter);
+				adapter.setList(list);
+				adapter.notifyDataSetChanged();
 		}
 
 		@Override

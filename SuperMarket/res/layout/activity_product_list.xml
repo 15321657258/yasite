@@ -32,16 +32,15 @@
          
      </AutoCompleteTextView>
 
-     
-        
-     
      <net.yasite.view.XListView
-        android:id="@+id/list_view"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/autoCompleteTextView1"
-        android:layout_marginTop="12dp" >
+       android:id="@+id/list_view"
+       android:layout_width="150dp"
+       android:layout_height="wrap_content"
+       android:layout_alignParentLeft="true"
+       android:layout_below="@+id/autoCompleteTextView1"
+       android:layout_marginTop="10dp"
+        >
+
     </net.yasite.view.XListView>
 
      <ImageButton

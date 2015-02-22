@@ -1,8 +1,10 @@
 package net.yasite.test;
 
+import net.yasite.exit.Exit;
 import net.yasite.fragment.CarFragment;
 import net.yasite.fragment.ClassiFragment;
 import net.yasite.fragment.HomeFragment;
+import net.yasite.fragment.OwnFragment;
 import net.yasite.fragment.RegistFragment;
 import net.yasite.sharepre.UserInfoShare;
 import android.app.Fragment;
@@ -26,8 +28,9 @@ public class HomeActivity extends BaseNewActivity {
 	private HomeFragment fragment;
 	private ClassiFragment classiFragment;
 	private CarFragment carFragment;
+	private OwnFragment ownFragment;
 	private Intent intent;
-	private RadioButton radio_regist,radia_fen,radio_cart;
+	private RadioButton radio_regist,radia_fen,radio_cart,radio_account;
 	@Override
 	public void setupView() {
 		// TODO Auto-generated method stub
@@ -36,8 +39,10 @@ public class HomeActivity extends BaseNewActivity {
 		radio_regist  = (RadioButton) findViewById(R.id.radio_regist);
 		radia_fen = (RadioButton) findViewById(R.id.radio_fen);
 		radio_cart = (RadioButton) findViewById(R.id.radio_cart);
+		radio_account = (RadioButton) findViewById(R.id.radio_account);
 		group.setOnCheckedChangeListener(listener);
 		intent = getIntent();
+		Exit.getInstance().addActivity(this);
 		
 	}
 	
@@ -51,6 +56,7 @@ public class HomeActivity extends BaseNewActivity {
 			radio_regist.setVisibility(View.GONE);
 		}
 		super.onResume();
+		
 	}
 
 
@@ -76,6 +82,12 @@ public class HomeActivity extends BaseNewActivity {
 			case R.id.radio_cart:
 				carFragment = new CarFragment();
 				replaceFragment(carFragment);
+				infoShare.saveChecked("1");
+				break;
+			case R.id.radio_account:
+				ownFragment = new OwnFragment();
+				replaceFragment(ownFragment);
+				infoShare.saveChecked("2");
 				break;
 			default:
 				break;
@@ -102,6 +114,14 @@ public class HomeActivity extends BaseNewActivity {
 				registFragment = new RegistFragment();
 				replaceFragment(registFragment);
 				radio_regist.setChecked(true);
+			}else if(intent.getStringExtra("regist").equals("goodscar")){
+				carFragment = new CarFragment();
+				replaceFragment(carFragment);
+				radio_cart.setChecked(true);
+			}else if(intent.getStringExtra("regist").equals("own")){
+				ownFragment = new OwnFragment();
+				replaceFragment(ownFragment);
+				radio_account.setChecked(true);
 			}
 		}
 	}
@@ -128,8 +148,7 @@ public class HomeActivity extends BaseNewActivity {
 			} else {
 				infoShare.insertUserInfo("userinfo", MODE_PRIVATE, "", "", "","");
 				infoShare.idsertGoodsid("goods", MODE_PRIVATE, -1);
-				finish();
-				System.exit(0);
+				Exit.getInstance().onTerminate();
 			}
 			return true;
 		}
@@ -149,6 +168,9 @@ public class HomeActivity extends BaseNewActivity {
 		if(requestCode==1&&resultCode==1){
 			carFragment = new CarFragment();
 			replaceFragment(carFragment);
+		}else if(requestCode==2&&resultCode==2){
+			ownFragment = new OwnFragment();
+			replaceFragment(ownFragment);
 		}
 	}
 }

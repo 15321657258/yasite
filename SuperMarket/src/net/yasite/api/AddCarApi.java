@@ -2,9 +2,9 @@ package net.yasite.api;
 
 import java.util.List;
 
-import net.yasite.api.params.BaseHttpParam;
 import net.yasite.api.params.UserInfoParam;
 import net.yasite.entity.UserCarDataEntity;
+import net.yasite.entity.UserCarDatasEntity;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONException;
@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 
 import android.content.Context;
-import android.util.Log;
 
 public class AddCarApi extends BaseAPI {
 
@@ -25,9 +24,9 @@ public class AddCarApi extends BaseAPI {
 	}
 
 	@Override
-	public UserCarDataEntity handlerResult(JSONObject json) throws JSONException {
+	public UserCarDatasEntity handlerResult(JSONObject json) throws JSONException {
 		// TODO Auto-generated method stub
-		return new Gson().fromJson(json.toString(), UserCarDataEntity.class);
+		return new Gson().fromJson(json.toString(), UserCarDatasEntity.class);
 	}
 
 }

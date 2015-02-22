@@ -11,7 +11,6 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 
 import android.content.Context;
-import android.util.Log;
 
 public class RegistApi extends BaseAPI {
 

@@ -1,19 +1,16 @@
 package net.yasite.entity;
 
-public class UserCarDataEntity {
-	private UserCarEntity data;
+import java.util.List;
 
-	public UserCarEntity getData() {
+public class UserCarDataEntity {
+	private List<UserCarEntity> data;
+
+	public List<UserCarEntity> getData() {
 		return data;
 	}
 
-	public void setData(UserCarEntity data) {
+	public void setData(List<UserCarEntity> data) {
 		this.data = data;
-	}
-
-	@Override
-	public String toString() {
-		return "UserCarDataEntity [data=" + data + "]";
 	}
 	
 }
